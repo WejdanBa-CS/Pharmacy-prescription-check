@@ -2,7 +2,7 @@
 
 Section **2800-23**. Supervisor: **Prasanna Lakshmi**.
 
-A browser-based system that reads a medical prescription — typed or scanned from a **printed image via OCR** — and checks it against two SQLite databases (stock, trade names, side effects, and drug–drug interactions). It combines an SQL rule engine with an in-browser **machine-learning** model that predicts drug–drug interaction risk from pharmacological features.
+A browser based system that reads a medical prescription — typed or scanned from a **printed image via OCR** — and checks it against two SQLite databases (stock, trade names, side effects, and drug–drug interactions). It combines an SQL rule engine with an in browser **machine learning** model that predicts drug–drug interaction risk from pharmacological features.
 
 ## Features
 
@@ -52,4 +52,4 @@ See `sources/SOURCES.md`.
 - `sql/prescriptions.db` — PATIENT, PRESCRIPTION_ITEM
 - `sql/pharmacy.db` — DRUG, TRADE_NAME, SIDE_EFFECT, INTERACTION
 
-Flowchart images (for the report, not website pages): `images/system-flowchart.png`, `images/database-flowchart.png`.
+Flowchart images: `images/system-flowchart.png`, `images/database-flowchart.png`.
