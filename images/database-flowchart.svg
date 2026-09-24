@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1480" height="980" viewBox="0 0 1480 980">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0f766e"/>
+    </marker>
+  </defs>
+  <rect width="1480" height="980" fill="#ffffff"/>
+
+<text x="740" y="40" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="19" font-weight="bold" fill="#0f766e">Medical Prescription System for Drug-Drug Interaction using OCR and Machine Learning</text>
+<text x="740" y="66" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="16" fill="#5b746f">Database flowchart — two SQLite databases</text>
+<rect x="40" y="90" width="680" height="44" rx="8" fill="#0f766e"/>
+<text x="380" y="118" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#ffffff">Database 1:  sql/prescriptions.db</text>
+<rect x="70" y="150" width="280" height="138" rx="8" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+<rect x="70" y="150" width="280" height="34" rx="8" fill="#0f766e"/>
+<rect x="70" y="164" width="280" height="20" fill="#0f766e"/>
+<text x="210.0" y="173" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">PATIENT</text>
+<rect x="71" y="184" width="278" height="26" fill="#f3faf8"/>
+<line x1="70" y1="184" x2="350" y2="184" stroke="#cde5df" stroke-width="1"/>
+<rect x="78" y="189" width="26" height="15" rx="3" fill="#0f766e"/>
+<text x="91" y="200" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">PK</text>
+<text x="110" y="202" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#1f3d38">patient_id</text>
+<line x1="70" y1="210" x2="350" y2="210" stroke="#cde5df" stroke-width="1"/>
+<text x="82" y="228" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#1f3d38">name</text>
+<rect x="71" y="236" width="278" height="26" fill="#f3faf8"/>
+<line x1="70" y1="236" x2="350" y2="236" stroke="#cde5df" stroke-width="1"/>
+<text x="82" y="254" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#1f3d38">age</text>
+<line x1="70" y1="262" x2="350" y2="262" stroke="#cde5df" stroke-width="1"/>
+<text x="82" y="280" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#1f3d38">diagnosis</text>
+<rect x="420" y="150" width="270" height="112" rx="8" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+<rect x="420" y="150" width="270" height="34" rx="8" fill="#0f766e"/>
+<rect x="420" y="164" width="270" height="20" fill="#0f766e"/>
+<text x="555.0" y="173" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">PRESCRIPTION_ITEM</text>
+<rect x="421" y="184" width="268" height="26" fill="#f3faf8"/>
+<line x1="420" y1="184" x2="690" y2="184" stroke="#cde5df" stroke-width="1"/>
+<rect x="428" y="189" width="26" height="15" rx="3" fill="#0f766e"/>
+<text x="441" y="200" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">PK</text>
+<text x="460" y="202" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#1f3d38">item_id</text>
+<line x1="420" y1="210" x2="690" y2="210" stroke="#cde5df" stroke-width="1"/>
+<rect x="428" y="215" width="26" height="15" rx="3" fill="#b45309"/>
+<text x="441" y="226" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">FK</text>
+<text x="460" y="228" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#1f3d38">patient_id</text>
+<rect x="421" y="236" width="268" height="26" fill="#f3faf8"/>
+<line x1="420" y1="236" x2="690" y2="236" stroke="#cde5df" stroke-width="1"/>
+<text x="432" y="254" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#1f3d38">medicine_name</text>
+<line x1="350" y1="220" x2="420" y2="220" stroke="#0f766e" stroke-width="2"/>
+<text x="370" y="210" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#0f766e">1</text>
+<text x="408" y="210" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#0f766e">N</text>
+<text x="70" y="320" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" fill="#5b746f">5 patients  ·  13 prescription items</text>
+<rect x="760" y="90" width="680" height="44" rx="8" fill="#0f766e"/>
+<text x="1100" y="118" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#ffffff">Database 2:  sql/pharmacy.db</text>
+<rect x="790" y="150" width="280" height="60" rx="8" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+<rect x="790" y="150" width="280" height="34" rx="8" fill="#0f766e"/>
+<rect x="790" y="164" width="280" height="20" fill="#0f766e"/>
+<text x="930.0" y="173" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">DRUG</text>
+<rect x="791" y="184" width="278" height="26" fill="#f3faf8"/>
+<line x1="790" y1="184" x2="1070" y2="184" stroke="#cde5df" stroke-width="1"/>
+<rect x="798" y="189" width="26" height="15" rx="3" fill="#0f766e"/>
+<text x="811" y="200" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">PK</text>
+<text x="830" y="202" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#1f3d38">scientific_name</text>
+<rect x="1120" y="150" width="290" height="86" rx="8" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+<rect x="1120" y="150" width="290" height="34" rx="8" fill="#0f766e"/>
+<rect x="1120" y="164" width="290" height="20" fill="#0f766e"/>
+<text x="1265.0" y="173" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">TRADE_NAME</text>
+<rect x="1121" y="184" width="288" height="26" fill="#f3faf8"/>
+<line x1="1120" y1="184" x2="1410" y2="184" stroke="#cde5df" stroke-width="1"/>
+<rect x="1128" y="189" width="26" height="15" rx="3" fill="#0f766e"/>
+<text x="1141" y="200" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">PK</text>
+<text x="1160" y="202" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#1f3d38">trade_name</text>
+<line x1="1120" y1="210" x2="1410" y2="210" stroke="#cde5df" stroke-width="1"/>
+<rect x="1128" y="215" width="26" height="15" rx="3" fill="#b45309"/>
+<text x="1141" y="226" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">FK</text>
+<text x="1160" y="228" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#1f3d38">scientific_name</text>
+<rect x="790" y="260" width="280" height="112" rx="8" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+<rect x="790" y="260" width="280" height="34" rx="8" fill="#0f766e"/>
+<rect x="790" y="274" width="280" height="20" fill="#0f766e"/>
+<text x="930.0" y="283" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">SIDE_EFFECT</text>
+<rect x="791" y="294" width="278" height="26" fill="#f3faf8"/>
+<line x1="790" y1="294" x2="1070" y2="294" stroke="#cde5df" stroke-width="1"/>
+<rect x="798" y="299" width="26" height="15" rx="3" fill="#0f766e"/>
+<text x="811" y="310" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">PK</text>
+<text x="830" y="312" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#1f3d38">effect_id</text>
+<line x1="790" y1="320" x2="1070" y2="320" stroke="#cde5df" stroke-width="1"/>
+<rect x="798" y="325" width="26" height="15" rx="3" fill="#b45309"/>
+<text x="811" y="336" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">FK</text>
+<text x="830" y="338" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#1f3d38">scientific_name</text>
+<rect x="791" y="346" width="278" height="26" fill="#f3faf8"/>
+<line x1="790" y1="346" x2="1070" y2="346" stroke="#cde5df" stroke-width="1"/>
+<text x="802" y="364" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#1f3d38">effect_text</text>
+<rect x="1120" y="260" width="290" height="138" rx="8" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+<rect x="1120" y="260" width="290" height="34" rx="8" fill="#0f766e"/>
+<rect x="1120" y="274" width="290" height="20" fill="#0f766e"/>
+<text x="1265.0" y="283" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="bold" fill="#ffffff">INTERACTION</text>
+<rect x="1121" y="294" width="288" height="26" fill="#f3faf8"/>
+<line x1="1120" y1="294" x2="1410" y2="294" stroke="#cde5df" stroke-width="1"/>
+<rect x="1128" y="299" width="26" height="15" rx="3" fill="#0f766e"/>
+<text x="1141" y="310" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">PK</text>
+<text x="1160" y="312" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#1f3d38">interaction_id</text>
+<line x1="1120" y1="320" x2="1410" y2="320" stroke="#cde5df" stroke-width="1"/>
+<rect x="1128" y="325" width="26" height="15" rx="3" fill="#b45309"/>
+<text x="1141" y="336" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">FK</text>
+<text x="1160" y="338" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#1f3d38">drug1</text>
+<rect x="1121" y="346" width="288" height="26" fill="#f3faf8"/>
+<line x1="1120" y1="346" x2="1410" y2="346" stroke="#cde5df" stroke-width="1"/>
+<rect x="1128" y="351" width="26" height="15" rx="3" fill="#b45309"/>
+<text x="1141" y="362" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="9" font-weight="bold" fill="#ffffff">FK</text>
+<text x="1160" y="364" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#1f3d38">drug2</text>
+<line x1="1120" y1="372" x2="1410" y2="372" stroke="#cde5df" stroke-width="1"/>
+<text x="1132" y="390" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#1f3d38">description</text>
+<line x1="1070" y1="184" x2="1120" y2="184" stroke="#0f766e" stroke-width="2"/>
+<text x="1095" y="174" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#0f766e">1–N</text>
+<line x1="930" y1="210" x2="930" y2="260" stroke="#0f766e" stroke-width="2"/>
+<text x="938" y="242" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#0f766e">1–N</text>
+<line x1="1265" y1="228" x2="1265" y2="260" stroke="#0f766e" stroke-width="2"/>
+<text x="1274" y="250" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="bold" fill="#0f766e">1–N</text>
+<text x="790" y="430" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" fill="#5b746f">13 drugs  ·  27 trade names  ·  8 interactions</text>
+<text x="40" y="470" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1f3d38">How the two databases connect</text>
+<rect x="40" y="490" width="1400" height="70" rx="10" fill="#f3faf8" stroke="#cde5df"/>
+<text x="740" y="520" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="14" font-weight="normal" fill="#1f3d38">prescriptions.db.PRESCRIPTION_ITEM.medicine_name   matches   pharmacy.db.TRADE_NAME or DRUG.scientific_name</text>
+<text x="740" y="544" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" fill="#5b746f">Example: Panadol in a prescription  →  TRADE_NAME Panadol  →  DRUG Paracetamol</text>
+<text x="40" y="600" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="16" font-weight="bold" fill="#1f3d38">SQL used by the page</text>
+<rect x="40" y="620" width="250" height="70" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+<text x="165.0" y="648" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#1f3d38">SELECT from patient</text>
+<text x="165.0" y="670" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#5b746f">prescriptions.db</text>
+<line x1="290" y1="655" x2="328" y2="655" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="340" y="620" width="270" height="70" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+<text x="475.0" y="648" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#1f3d38">SELECT JOIN drug + trade</text>
+<text x="475.0" y="670" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#5b746f">pharmacy.db  (match name)</text>
+<line x1="610" y1="655" x2="648" y2="655" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="660" y="620" width="250" height="70" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+<text x="785.0" y="648" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#1f3d38">SELECT side_effect</text>
+<text x="785.0" y="670" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#5b746f">pharmacy.db</text>
+<line x1="910" y1="655" x2="948" y2="655" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="960" y="620" width="250" height="70" rx="10" fill="#ffffff" stroke="#0f766e" stroke-width="2"/>
+<text x="1085.0" y="648" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#1f3d38">SELECT interaction</text>
+<text x="1085.0" y="670" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#5b746f">pharmacy.db  (two drugs)</text>
+<line x1="1210" y1="655" x2="1248" y2="655" stroke="#0f766e" stroke-width="2" marker-end="url(#arrow)"/>
+<rect x="1260" y="620" width="180" height="70" rx="10" fill="#d9f2ea" stroke="#0f766e" stroke-width="2"/>
+<text x="1350.0" y="648" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#1f3d38">Show result</text>
+<text x="1350.0" y="670" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#5b746f">on the page</text>
+<rect x="40" y="720" width="1400" height="88" rx="8" fill="#ffffff" stroke="#cde5df"/>
+<text x="60" y="750" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#1f3d38">PK = primary key     FK = foreign key     1–N = one-to-many</text>
+<text x="60" y="776" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" fill="#5b746f">Open sql/prescriptions.db and sql/pharmacy.db in DB Browser for SQLite. SQL scripts: sql/prescriptions.sql and sql/pharmacy.sql.</text>
+<text x="60" y="798" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#5b746f">Section 2800-23  ·  Supervisor: Prasanna Lakshmi</text>
+</svg>

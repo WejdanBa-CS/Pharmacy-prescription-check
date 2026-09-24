@@ -1,0 +1,19 @@
+Drug 1,Drug 2,Interaction Description
+Ibuprofen,Warfarin,The risk or severity of bleeding can be increased when Ibuprofen is combined with Warfarin.
+Aspirin,Warfarin,The risk or severity of bleeding can be increased when Aspirin is combined with Warfarin.
+Ibuprofen,Aspirin,The therapeutic efficacy of Aspirin can be decreased when used in combination with Ibuprofen.
+Metronidazole,Warfarin,The risk or severity of bleeding can be increased when Metronidazole is combined with Warfarin.
+Azithromycin,Warfarin,The serum concentration of Warfarin can be increased when it is combined with Azithromycin.
+Amlodipine,Atorvastatin,The metabolism of Atorvastatin can be decreased when combined with Amlodipine.
+Omeprazole,Warfarin,The serum concentration of Warfarin can be increased when it is combined with Omeprazole.
+Paracetamol,Warfarin,The risk or severity of adverse effects can be increased when Paracetamol is combined with Warfarin.
+Clopidogrel,Omeprazole,The serum concentration of the active metabolites of Clopidogrel can be reduced when it is combined with Omeprazole.
+Clopidogrel,Aspirin,The risk or severity of bleeding can be increased when Clopidogrel is combined with Aspirin.
+Prednisolone,Aspirin,The risk or severity of gastrointestinal bleeding can be increased when Prednisolone is combined with Aspirin.
+Bisoprolol,Amlodipine,Bisoprolol may increase the hypotensive activities of Amlodipine.
+Metformin,Prednisolone,The therapeutic efficacy of Metformin can be decreased when used in combination with Prednisolone.
+Ibuprofen,Prednisolone,The risk or severity of gastrointestinal irritation can be increased when Ibuprofen is combined with Prednisolone.
+Atorvastatin,Clarithromycin,The serum concentration of Atorvastatin can be increased when it is combined with Clarithromycin.
+Warfarin,Amoxicillin/Clavulanate,The risk or severity of bleeding can be increased when Amoxicillin/Clavulanate is combined with Warfarin.
+Cetirizine,Lorazepam,Cetirizine may increase the central nervous system depressant activities of Lorazepam.
+Salbutamol,Bisoprolol,The therapeutic efficacy of Salbutamol can be decreased when used in combination with Bisoprolol.

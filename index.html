@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Medical Prescription System for Drug-Drug Interaction using OCR and Machine Learning</title>
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+  <body>
+    <header>
+      <div class="header-inner">
+        <div class="brand">
+          <span class="rx" aria-hidden="true">Rx</span>
+          <div>
+            <h1>Medical Prescription System for Drug-Drug Interaction using OCR and Machine Learning</h1>
+            <p>Reads printed prescriptions with OCR and flags drug&ndash;drug interactions using SQL rules and an in-browser machine-learning model</p>
+          </div>
+        </div>
+        <div class="db-pills" id="db-pills">
+          <span>prescriptions.db</span>
+          <span>pharmacy.db</span>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Prescriptions</h2>
+          <p class="muted">Loaded from <code>prescriptions.db</code></p>
+        </div>
+        <div id="patient-list" class="patient-list"></div>
+        <p id="patient-info" class="case-line">Select a case, or type medicine names in the slip.</p>
+
+        <form id="rx-form" class="slip" action="javascript:void(0)">
+          <div class="slip-top">
+            <strong>Prescription slip</strong>
+            <span id="slip-meta">New entry</span>
+          </div>
+          <div class="ocr">
+            <label for="rx-image">Scan a printed prescription (OCR)</label>
+            <input type="file" id="rx-image" accept="image/*" />
+            <p id="ocr-status" class="ocr-status"></p>
+            <img id="ocr-preview" class="ocr-preview" alt="Prescription preview" hidden />
+          </div>
+          <label for="rx">Medicines</label>
+          <textarea id="rx" placeholder="Panadol, Augmentin, Ventolin"></textarea>
+          <div class="actions">
+            <button type="submit" class="btn btn-main" id="btn-check">Check against pharmacy</button>
+            <button type="button" class="btn" id="btn-clear">Clear</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <h2>Pharmacy result</h2>
+          <p class="muted">SQL lookup on <code>pharmacy.db</code></p>
+        </div>
+        <div id="results">
+          <div class="empty">
+            <strong>Waiting for a check</strong>
+            <span>Pick a patient on the left, then press Check against pharmacy.</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <p>
+        Sources in <code>sources/</code> —
+        Medical Prescription Dataset (Kaggle) and Drug-Drug Interactions (Kaggle / DrugBank).
+        Academic sample. Not medical advice.
+      </p>
+    </footer>
+
+    <script src="js/sql-asm.js"></script>
+    <script src="js/schema.js"></script>
+    <script src="js/database.js"></script>
+    <script src="js/match.js"></script>
+    <script src="js/vendor/tesseract/tesseract.min.js"></script>
+    <script src="js/vendor/tfjs/tf.min.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/ocr.js"></script>
+    <script src="js/ml-features.js"></script>
+    <script src="js/ml.js"></script>
+  </body>
+</html>

@@ -1,0 +1,25 @@
+Patient_ID,Patient_Name,Age,Gender,Diagnosis,Medicine_Name,Dosage,Frequency,Duration,Route,Doctor_Specialty,Hospital,Prescription_Date,Prescription_Status
+P1,Ahmed Ali,32,Male,Fever and sinus infection,Panadol,500 mg,Three times daily,5 days,Oral,General Practice,King Fahd Clinic,2026-02-03,Active
+P1,Ahmed Ali,32,Male,Fever and sinus infection,Augmentin,625 mg,Twice daily,7 days,Oral,General Practice,King Fahd Clinic,2026-02-03,Active
+P1,Ahmed Ali,32,Male,Fever and sinus infection,Ventolin,100 mcg,As needed,14 days,Inhalation,General Practice,King Fahd Clinic,2026-02-03,Active
+P2,Fatimah Hassan,61,Female,Joint pain and blood thinner,Brufen,400 mg,Twice daily,10 days,Oral,Rheumatology,Riyadh Medical Center,2026-02-08,Active
+P2,Fatimah Hassan,61,Female,Joint pain and blood thinner,Marevan,5 mg,Once daily,30 days,Oral,Cardiology,Riyadh Medical Center,2026-02-08,Active
+P2,Fatimah Hassan,61,Female,Joint pain and blood thinner,Aspirin,81 mg,Once daily,30 days,Oral,Cardiology,Riyadh Medical Center,2026-02-08,Active
+P3,Khalid Mohammed,54,Male,"Diabetes, blood pressure, cholesterol",Glucophage,500 mg,Twice daily,30 days,Oral,Internal Medicine,Jeddah General Hospital,2026-01-22,Active
+P3,Khalid Mohammed,54,Male,"Diabetes, blood pressure, cholesterol",Lipitor,20 mg,Once daily,30 days,Oral,Internal Medicine,Jeddah General Hospital,2026-01-22,Active
+P3,Khalid Mohammed,54,Male,"Diabetes, blood pressure, cholesterol",Norvasc,5 mg,Once daily,30 days,Oral,Internal Medicine,Jeddah General Hospital,2026-01-22,Active
+P4,Noura Saad,27,Female,Infection with pain,Adol,500 mg,Three times daily,5 days,Oral,General Practice,Al Ahsa Clinic,2026-03-01,Active
+P4,Noura Saad,27,Female,Infection with pain,Flagyl,500 mg,Three times daily,7 days,Oral,General Practice,Al Ahsa Clinic,2026-03-01,Active
+P4,Noura Saad,27,Female,Infection with pain,Xanax,0.5 mg,At bedtime,7 days,Oral,General Practice,Al Ahsa Clinic,2026-03-01,Active
+P5,Sara Ahmed,19,Female,Allergy,Zyrtec,10 mg,Once daily,14 days,Oral,Dermatology,King Fahd Clinic,2026-03-11,Active
+P6,Omar Saleh,45,Male,Stomach burn with pain,Losec,20 mg,Once daily,14 days,Oral,Gastroenterology,Dammam Hospital,2026-03-14,Active
+P6,Omar Saleh,45,Male,Stomach burn with pain,Brufen,400 mg,Twice daily,5 days,Oral,Gastroenterology,Dammam Hospital,2026-03-14,Active
+P7,Layla Ibrahim,70,Female,Heart rhythm and blood thinner,Marevan,3 mg,Once daily,30 days,Oral,Cardiology,Riyadh Medical Center,2026-03-18,Active
+P7,Layla Ibrahim,70,Female,Heart rhythm and blood thinner,Concor,5 mg,Once daily,30 days,Oral,Cardiology,Riyadh Medical Center,2026-03-18,Active
+P8,Hassan Yusuf,38,Male,Asthma flare,Ventolin,100 mcg,As needed,14 days,Inhalation,Pulmonology,Jeddah General Hospital,2026-03-20,Active
+P8,Hassan Yusuf,38,Male,Asthma flare,Prednisolone,20 mg,Once daily,5 days,Oral,Pulmonology,Jeddah General Hospital,2026-03-20,Active
+P9,Maryam Fahad,29,Female,Urinary infection,Augmentin,625 mg,Twice daily,7 days,Oral,Urology,Al Ahsa Clinic,2026-03-21,Active
+P9,Maryam Fahad,29,Female,Urinary infection,Flagyl,500 mg,Twice daily,5 days,Oral,Urology,Al Ahsa Clinic,2026-03-21,Active
+P10,Abdullah Nasser,66,Male,After heart stent,Plavix,75 mg,Once daily,30 days,Oral,Cardiology,King Fahd Clinic,2026-03-25,Active
+P10,Abdullah Nasser,66,Male,After heart stent,Aspirin,81 mg,Once daily,30 days,Oral,Cardiology,King Fahd Clinic,2026-03-25,Active
+P10,Abdullah Nasser,66,Male,After heart stent,Lipitor,40 mg,Once daily,30 days,Oral,Cardiology,King Fahd Clinic,2026-03-25,Active
