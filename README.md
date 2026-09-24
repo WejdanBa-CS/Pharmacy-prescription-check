@@ -1,14 +1,15 @@
 # Medical Prescription System for Drug-Drug Interaction using OCR and Machine Learning
 
-Section **2800-23**. Supervisor: **Prasanna Lakshmi**.
+Section **2800-23**. Supervisor: **Prasanalakshmi Balaji**.
 
-A browser based system that reads a medical prescription — typed or scanned from a **printed image via OCR** — and checks it against two SQLite databases (stock, trade names, side effects, and drug–drug interactions). It combines an SQL rule engine with an in browser **machine learning** model that predicts drug–drug interaction risk from pharmacological features.
+This is our course project. The website checks medicines from a prescription. You can type the names, choose a sample patient, or upload a printed prescription image. The page searches in SQLite databases and shows if the medicine is available, its side effects, and known interactions. There is also a small ML score for medicine pairs.
 
 ## Features
 
-- **OCR**: upload a printed prescription image; medicine names are recognized with Tesseract.js (LSTM neural network) and matched to the catalog.
-- **SQL lookup**: trade name → active ingredient, side effects, and known interactions from `pharmacy.db`.
-- **Machine learning**: a TensorFlow.js neural network trained in the browser on drug-feature pairs, predicting interaction risk (and generalizing to pairs not in the rule table).
+- OCR for printed prescription images (Tesseract.js)
+- SQL search for trade names and scientific names
+- Side effects and drug-drug interaction messages
+- ML risk score for pairs (TensorFlow.js)
 
 ## Team
 
@@ -20,23 +21,28 @@ A browser based system that reads a medical prescription — typed or scanned fr
 
 ## How to run
 
-The OCR and ML features use WebAssembly and Web Workers, so the page must be served over HTTP (not opened directly with `file://`). From the project folder:
+Use a local server (needed for OCR and ML):
 
 ```
 python3 -m http.server 8000
 ```
 
-Then open http://localhost:8000/ in Chrome. Keep `css`, `js`, `sql`, `sources`, and `samples` next to `index.html`. A printed sample prescription is provided at `samples/sample-prescription.png`.
+Then open http://localhost:8000/ in Chrome.
 
-Inspect the databases with [DB Browser for SQLite](https://sqlitebrowser.org/): `sql/prescriptions.db` and `sql/pharmacy.db`.
+Sample image: `samples/sample-prescription.png`
 
-Rebuild from the attached CSVs:
+Database files:
+
+- `sql/prescriptions.db`
+- `sql/pharmacy.db`
+
+Rebuild from CSV:
 
 ```
 python3 sql/build_from_sources.py
 ```
 
-## Sources (attached)
+## Sources
 
 See `sources/SOURCES.md`.
 
@@ -44,12 +50,12 @@ See `sources/SOURCES.md`.
 | --- | --- |
 | `sources/medical_prescription_dataset.csv` | [Medical Prescription Dataset](https://www.kaggle.com/datasets/mmumairkhattak/medical-prescription-dataset) |
 | `sources/drug_drug_interactions.csv` | [Drug-Drug Interactions](https://www.kaggle.com/datasets/mghobashy/drug-drug-interactions) |
-| `sources/pharmacy_catalog.csv` | Pharmacy stock (scientific name + trade name) |
-| `sources/drug_side_effects.csv` | Side effects for catalog drugs |
+| `sources/pharmacy_catalog.csv` | Pharmacy stock list for this project |
+| `sources/drug_side_effects.csv` | Side effects for the stock list |
 
-## SQL databases
+## Databases
 
-- `sql/prescriptions.db` — PATIENT, PRESCRIPTION_ITEM
-- `sql/pharmacy.db` — DRUG, TRADE_NAME, SIDE_EFFECT, INTERACTION
+- `sql/prescriptions.db` - patients and prescription items
+- `sql/pharmacy.db` - drugs, trade names, side effects, interactions
 
-Flowchart images: `images/system-flowchart.png`, `images/database-flowchart.png`.
+Report images: `images/system-flowchart.png` and `images/database-flowchart.png`.

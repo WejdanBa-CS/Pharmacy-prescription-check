@@ -1,17 +1,17 @@
-# Data sources (attached)
+# Data sources
 
-The SQLite databases are built from the CSV files in this folder.
+We build the SQLite databases from the CSV files in this folder.
 
 | File | Source | Used in |
 | --- | --- | --- |
-| `medical_prescription_dataset.csv` | [Medical Prescription Dataset](https://www.kaggle.com/datasets/mmumairkhattak/medical-prescription-dataset) (Kaggle, mmumairkhattak) | `sql/prescriptions.db` |
-| `drug_drug_interactions.csv` | [Drug-Drug Interactions](https://www.kaggle.com/datasets/mghobashy/drug-drug-interactions) (Kaggle, MGhobashy / DrugBank text) | `sql/pharmacy.db` table `interaction` |
-| `pharmacy_catalog.csv` | Pharmacy stock list prepared for this project (scientific name + trade names used in KSA) | `sql/pharmacy.db` tables `drug`, `trade_name` |
-| `drug_side_effects.csv` | Side-effect notes for the catalog drugs | `sql/pharmacy.db` table `side_effect` |
+| `medical_prescription_dataset.csv` | [Medical Prescription Dataset](https://www.kaggle.com/datasets/mmumairkhattak/medical-prescription-dataset) (Kaggle) | `sql/prescriptions.db` |
+| `drug_drug_interactions.csv` | [Drug-Drug Interactions](https://www.kaggle.com/datasets/mghobashy/drug-drug-interactions) (Kaggle) | `sql/pharmacy.db` interaction table |
+| `pharmacy_catalog.csv` | Stock list made for this project | `sql/pharmacy.db` drug and trade_name tables |
+| `drug_side_effects.csv` | Side effects for our stock list | `sql/pharmacy.db` side_effect table |
 
-The full Kaggle files are large and need a Kaggle account. These CSVs keep the **same columns** as the published datasets and a **sample of rows** used by the page.
+The original Kaggle files are large. Our files keep the same columns but with a smaller sample for the project.
 
-Rebuild the databases:
+To rebuild the databases:
 
 ```
 python3 sql/build_from_sources.py

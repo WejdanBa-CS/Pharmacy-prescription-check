@@ -1,10 +1,10 @@
 # Project Document
 
-**Project title:** Matching a medical prescription with a pharmacy list
+**Project title:** Medical Prescription System for Drug-Drug Interaction using OCR and Machine Learning
 
 **Section:** 2800-23
 
-**Supervisor:** Prasanna Lakshmi
+**Supervisor:** Prasanalakshmi Balaji
 
 **Date:** September 2026
 
@@ -20,26 +20,30 @@
 
 ## 1. Introduction
 
-The user enters medicines from a prescription. The program checks if they exist in the pharmacy SQLite database. If the medicine is there, it shows the scientific name, trade names, side effects, and any drug-drug interaction when there are two or more drugs. If it is not there, it shows “not available”.
+In this project we built a simple website for checking medicines from a prescription. The user can type the medicine names, choose a sample patient, or upload a printed prescription picture. The program searches in a pharmacy SQLite database. If the medicine is found, it shows the scientific name, trade names, and side effects. If there are two or more medicines, it also checks for drug-drug interactions. If the medicine is not in the database, it shows that it is not available.
 
-The site is in English. Drug names stay as pharmacies write them (Panadol, Adol, …).
+We also added a small machine learning part. It gives a risk score for medicine pairs based on drug features. This is only an extra help. The main check is still the SQL rules.
 
-The project uses two SQLite databases. The check page runs SQL (SELECT / JOIN) on those databases.
+The website language is English. Medicine names are written the same way pharmacies write them, for example Panadol or Adol.
 
-The data is a small academic sample. It is not medical advice.
+The data we used is a small sample for the course. This project is not medical advice and should not be used in a real pharmacy.
 
 ---
 
 ## 2. Objective
 
-One main flow:
+The main goal is:
 
-enter prescription → SQL match with pharmacy database → show result
+1. Read medicines from text or from a printed image (OCR).
+2. Match each medicine with the pharmacy database using SQL.
+3. Show the result (found or not found).
+4. Show side effects and known interactions when possible.
+5. Show an ML risk score for pairs of found medicines.
 
-Flowchart images (not website pages):
+Flowchart files used in the report (not website pages):
 
-- `images/system-flowchart.png` — check process
-- `images/database-flowchart.png` — the two SQL databases
+- `images/system-flowchart.png` (how the check works)
+- `images/database-flowchart.png` (the two databases)
 
 ---
 
@@ -47,44 +51,60 @@ Flowchart images (not website pages):
 
 | Part | What it does |
 | --- | --- |
-| `index.html` | Check page (patients, input, results) |
-| `sql/prescriptions.db` | SQLite database 1: patients and prescription items |
-| `sql/pharmacy.db` | SQLite database 2: drugs, trade names, side effects, interactions |
-| `sources/` | Attached CSV datasets used to build the SQL databases |
+| `index.html` | Main page (patients, input, OCR upload, results) |
+| `css/style.css` | Page style |
+| `js/app.js` | Buttons and showing results |
+| `js/match.js` | Splits the text and starts the check |
 | `js/database.js` | Opens the databases and runs SQL |
-| `js/match.js` | Splits the text and calls the SQL lookups |
-| `js/app.js` | Buttons and showing the result |
-| `css/style.css` | Page look |
-| `images/system-flowchart.png` | System flowchart for the report |
-| `images/database-flowchart.png` | Database flowchart for the report |
+| `js/ocr.js` | Reads the prescription image |
+| `js/ml.js` | Trains and runs the ML risk model |
+| `js/ml-features.js` | Drug features used by ML |
+| `sql/prescriptions.db` | Patients and prescription items |
+| `sql/pharmacy.db` | Drugs, trade names, side effects, interactions |
+| `sources/` | CSV files used to build the databases |
 
 ---
 
 ## 4. Datasets
 
-The CSV source files are attached in `sources/`. SQLite is built from those files (`python3 sql/build_from_sources.py`). The full Kaggle dumps are large; the attached CSVs keep the published columns and a working sample.
+The CSV files are in the `sources/` folder. We build SQLite from them with:
 
-### Medical prescriptions → `sources/medical_prescription_dataset.csv` → prescriptions.db
+```
+python3 sql/build_from_sources.py
+```
+
+The full Kaggle files are very large, so we kept a smaller sample with the same columns.
+
+### Prescriptions
+
+File: `sources/medical_prescription_dataset.csv`
 
 Source: [Medical Prescription Dataset](https://www.kaggle.com/datasets/mmumairkhattak/medical-prescription-dataset)
 
-10 patients (P1–P10). Each row is one prescribed medicine, with dosage, frequency, hospital, and date.
+This file has sample patients (P1 to P10) and the medicines in each prescription.
 
-### Drug–drug interactions → `sources/drug_drug_interactions.csv` → pharmacy.db
+### Drug-drug interactions
+
+File: `sources/drug_drug_interactions.csv`
 
 Source: [Drug-Drug Interactions](https://www.kaggle.com/datasets/mghobashy/drug-drug-interactions)
 
 Columns: Drug 1, Drug 2, Interaction Description.
 
-### Pharmacy catalog → `sources/pharmacy_catalog.csv` and `sources/drug_side_effects.csv`
+### Pharmacy catalog and side effects
 
-Scientific names, trade names used in KSA, and side effects for the stock list.
+Files:
+
+- `sources/pharmacy_catalog.csv`
+- `sources/drug_side_effects.csv`
+
+These files have scientific names, trade names, and side effects for the medicines in our stock list.
 
 ---
 
 ## 5. Databases
 
-The application has two SQLite databases.
+We use two SQLite databases.
 
 Insert this image in the report:
 
@@ -97,9 +117,11 @@ File: `images/database-flowchart.png`
 | `sql/prescriptions.db` | PATIENT, PRESCRIPTION_ITEM |
 | `sql/pharmacy.db` | DRUG, TRADE_NAME, SIDE_EFFECT, INTERACTION |
 
-A patient has many prescription items. A drug has many trade names, many side effects, and can appear in many interaction rows. The page matches a typed medicine name with `SELECT` + `JOIN` on `scientific_name` or `trade_name`.
+One patient can have many prescription items. One drug can have many trade names and many side effects. A drug can also appear in many interaction rows.
 
-Open the `.db` files in DB Browser for SQLite. The same schema is in `sql/prescriptions.sql` and `sql/pharmacy.sql`.
+When the user types a medicine name, the page runs SQL with SELECT and JOIN on `scientific_name` or `trade_name`.
+
+You can open the `.db` files in DB Browser for SQLite. The same structure is also saved in `sql/prescriptions.sql` and `sql/pharmacy.sql`.
 
 ---
 
@@ -111,25 +133,48 @@ Insert this image in the report:
 
 File: `images/system-flowchart.png`
 
-1. User types a drug name or a full prescription, or clicks a sample patient (loaded from `prescriptions.db`).
-2. Program splits the text (comma or new line).
-3. Each name is matched with a SQL query on `pharmacy.db`.
-4. Found → show drug, active ingredient, side effects (from SQL).
-5. Two or more found drugs → `SELECT` from the interaction table.
-6. Not found → not available, and the user can add it to a list on the same page.
+1. The user opens the page with a local server.
+2. The user types medicines, picks a sample patient, or uploads a printed image.
+3. If an image is uploaded, OCR reads the text and tries to find medicine names.
+4. The program splits the text by comma or new line.
+5. Each name is checked in `pharmacy.db`.
+6. If found, the page shows the drug info and side effects.
+7. If two or more drugs are found, the page checks the interaction table.
+8. The ML model also gives a risk score for each pair.
+9. If not found, the page shows not available.
 
 ---
 
-## 7. Limitations
+## 7. OCR and Machine Learning
 
-- Small sample only, not the full Kaggle files.
-- Name matching is simple (same name, ignoring capital letters).
-- Academic project, not a hospital system.
+### OCR
+
+We used Tesseract.js to read English text from a printed prescription image. After OCR, the program looks for medicine names that exist in our pharmacy list. A sample image is in `samples/sample-prescription.png`.
+
+### Machine Learning
+
+We used TensorFlow.js in the browser. The model trains when the page opens. It uses simple drug features (for example drug class and some metabolism flags) and learns from the interaction table. Then it gives a probability score for each pair. This part is small and only for the course demo. It is not a real clinical tool.
 
 ---
 
-## 8. How to run
+## 8. Limitations
 
-Open `index.html` in Chrome or Safari (double-click the file).
+- The data sample is small.
+- Name matching is basic (similar spelling / lower case).
+- OCR may fail if the image is not clear.
+- The ML model is trained on a small set, so the score is only a rough estimate.
+- This is a student project, not a hospital system.
 
-To view the tables, open `sql/prescriptions.db` and `sql/pharmacy.db` in DB Browser for SQLite.
+---
+
+## 9. How to run
+
+Because OCR and ML need special browser features, do not open the file directly. Use a local server:
+
+```
+python3 -m http.server 8000
+```
+
+Then open http://localhost:8000/ in Chrome.
+
+To see the tables, open `sql/prescriptions.db` and `sql/pharmacy.db` in DB Browser for SQLite.

@@ -1,10 +1,4 @@
-// Curated pharmacological feature table for the in-browser DDI predictor.
-// Each of the 26 scientific drug names maps to a set of binary features that
-// encode mechanism-of-action and metabolism traits relevant to interactions.
-// The feature vector for a drug pair is built order-invariantly in ml.js
-// (element-wise OR and AND of the two vectors), so the neural net can learn
-// pair-level patterns such as "an enzyme inhibitor meets its substrate" or
-// "two drugs that both raise bleeding risk".
+// Drug features used by the ML model (1 = yes, missing = 0).
 
 var ML_FEATURE_COLUMNS = [
   "anticoagulant",
@@ -30,9 +24,7 @@ var ML_FEATURE_COLUMNS = [
   "antidiabetic",
 ]
 
-// For readability each drug lists only the feature columns that are "on" (=1).
-// Any column not listed is treated as 0. Assignments follow well-established
-// clinical pharmacology (metabolism pathway, drug class, bleeding/GI risk).
+// Only list features that are on (=1). Others are treated as 0.
 var DRUG_FEATURE_FLAGS = {
   Paracetamol: ["increases_bleeding_risk"],
   Ibuprofen: ["nsaid", "cyp2c9_substrate", "increases_bleeding_risk", "gi_irritant"],
@@ -68,10 +60,9 @@ var DRUG_FEATURE_FLAGS = {
   Gliclazide: ["antidiabetic"],
 }
 
-// List of the 26 scientific names (stable order used everywhere in ml.js).
+// Scientific names used for training.
 var ML_DRUGS = Object.keys(DRUG_FEATURE_FLAGS)
 
-// Returns the dense binary feature vector (array of 0/1) for a scientific name.
 function drugFeatureVector(name) {
   var flags = DRUG_FEATURE_FLAGS[name] || []
   var set = {}

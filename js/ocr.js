@@ -15,7 +15,7 @@ function ocrInit() {
     langPath: "js/vendor/tesseract/",
     logger: function (m) {
       if (m.status === "recognizing text") {
-        setOcrStatus("Reading prescription image… " + Math.round(m.progress * 100) + "%", "busy")
+        setOcrStatus("Reading prescription image... " + Math.round(m.progress * 100) + "%", "busy")
       }
     },
   })
@@ -63,10 +63,10 @@ function handleOcrImage(file) {
     preview.src = URL.createObjectURL(file)
     preview.hidden = false
   }
-  setOcrStatus("Loading OCR engine…", "busy")
+  setOcrStatus("Loading OCR engine...", "busy")
   ocrInit()
     .then(function (worker) {
-      setOcrStatus("Reading prescription image…", "busy")
+      setOcrStatus("Reading prescription image...", "busy")
       return worker.recognize(file)
     })
     .then(function (res) {
@@ -79,7 +79,7 @@ function handleOcrImage(file) {
         if (typeof checkNow === "function") checkNow()
       } else {
         rx.value = String(text).trim()
-        setOcrStatus("No catalog medicine matched. Raw text loaded — edit it, then press Check.", "warn")
+        setOcrStatus("No catalog medicine matched. Raw text loaded - edit it, then press Check.", "warn")
       }
     })
     .catch(function (e) {

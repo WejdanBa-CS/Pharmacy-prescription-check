@@ -1,23 +1,26 @@
 # Flowcharts
 
-The flowcharts are image files. They are **not** pages on the website.
+These images are for the report only. They are not pages in the website.
 
 ## System flowchart
+
+Files:
 
 - `images/system-flowchart.png`
 - `images/system-flowchart.svg`
 
-Shows the check process: open the page, enter medicines, run SQL on the two databases, then in stock / not available / interaction.
+This image shows the check steps: open the page, enter medicines, run SQL, then show found / not available / interaction.
 
 ## Database flowchart
+
+Files:
 
 - `images/database-flowchart.png`
 - `images/database-flowchart.svg`
 
-Two SQLite databases:
+We have two SQLite databases:
 
-**prescriptions.db** — PATIENT, PRESCRIPTION_ITEM
+- `prescriptions.db` has PATIENT and PRESCRIPTION_ITEM
+- `pharmacy.db` has DRUG, TRADE_NAME, SIDE_EFFECT, and INTERACTION
 
-**pharmacy.db** — DRUG, TRADE_NAME, SIDE_EFFECT, INTERACTION
-
-A medicine name in a prescription is matched with a trade name or scientific name in the pharmacy database.
+A medicine name from the prescription is matched with a trade name or a scientific name in the pharmacy database.

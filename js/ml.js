@@ -1,22 +1,12 @@
-// In-browser drug-drug interaction (DDI) predictor built and trained with
-// TensorFlow.js. This is an ADDITIVE machine-learning layer: the existing
-// rule-based interaction lookup (findInteractions / renderResults) keeps
-// working untouched. The model learns interaction probability from curated
-// pharmacological features (js/ml-features.js) so it can flag risky pairs
-// even when that exact pair is absent from the SQL interaction table.
+// Drug-drug interaction predictor (TensorFlow.js).
+// Extra check on top of the SQL interaction table.
 
 var mlModel = null
 var mlReady = false
 var mlAccuracy = null
 var mlTrainingPromise = null
 
-// --- Feature engineering ---------------------------------------------------
-
-// Order-invariant pair encoding: concatenate element-wise OR and AND of the
-// two drugs' binary feature vectors. OR captures "this trait is present in the
-// pair", AND captures "both drugs share this trait". The dense layers can then
-// combine OR bits (e.g. OR(cyp3a4_inhibitor) with OR(cyp3a4_substrate)) to
-// learn inhibitor-meets-substrate style interactions regardless of drug order.
+// Combine two drug feature vectors (OR + AND) so order does not matter.
 function pairFeatureVector(nameA, nameB) {
   var a = drugFeatureVector(nameA)
   var b = drugFeatureVector(nameB)
@@ -30,10 +20,7 @@ function pairFeatureVector(nameA, nameB) {
   return orv.concat(andv)
 }
 
-// --- Labels from the SQL interaction table ---------------------------------
-
-// Hardcoded fallback in case the DB is not reachable. Prefer deriving at
-// runtime (getInteractionPairSet) so labels stay in sync with pharmacy.db.
+// Fallback labels if the DB is not ready yet.
 var ML_FALLBACK_POSITIVE_PAIRS = [
   ["Ibuprofen", "Warfarin"],
   ["Aspirin", "Warfarin"],
@@ -81,7 +68,7 @@ function getInteractionPairSet() {
   return set
 }
 
-// Build the full training set: all unordered pairs of the 26 drugs (325 rows).
+// Build training pairs from the drug list.
 function buildTrainingData() {
   var positives = getInteractionPairSet()
   var xs = []
@@ -97,8 +84,6 @@ function buildTrainingData() {
   }
   return { xs: xs, ys: ys }
 }
-
-// --- Model definition + training -------------------------------------------
 
 function buildModel(inputDim) {
   var model = tf.sequential()
@@ -125,18 +110,18 @@ function trainInteractionModel(onStatus) {
   var inputDim = data.xs[0].length
 
   if (onStatus) {
-    onStatus("training", "ML model: training… (" + nPos + " positive / " + nTotal + " pairs)")
+    onStatus("training", "ML model: training... (" + nPos + " positive / " + nTotal + " pairs)")
   }
   console.log(
-    "[ML-DDI] Training on " +
+    "[ML] Training on " +
       nTotal +
-      " unordered drug pairs (" +
+      " drug pairs (" +
       nPos +
-      " positive interactions), input dim = " +
+      " positive), input dim = " +
       inputDim
   )
 
-  // Class weighting handles the heavy imbalance (only ~18 positives).
+  // More weight for the smaller positive class.
   var classWeight = {
     0: nTotal / (2 * Math.max(1, nNeg)),
     1: nTotal / (2 * Math.max(1, nPos)),
@@ -157,9 +142,9 @@ function trainInteractionModel(onStatus) {
         onEpochEnd: function (epoch, logs) {
           if ((epoch + 1) % 50 === 0 || epoch === 0) {
             console.log(
-              "[ML-DDI] epoch " +
+              "[ML] epoch " +
                 (epoch + 1) +
-                " — loss " +
+                " - loss " +
                 logs.loss.toFixed(4) +
                 ", acc " +
                 (logs.acc !== undefined ? logs.acc : logs.accuracy).toFixed(4)
@@ -177,14 +162,13 @@ function trainInteractionModel(onStatus) {
       xsT.dispose()
       ysT.dispose()
       console.log(
-        "[ML-DDI] Training complete — final loss " +
+        "[ML] Training complete - final loss " +
           finalLoss.toFixed(4) +
           ", final accuracy " +
           (finalAcc * 100).toFixed(1) +
           "%"
       )
-      // Sanity check: report how the known positives score.
-      try {
+            try {
         var knownProbs = ML_FALLBACK_POSITIVE_PAIRS.map(function (p) {
           return predictInteraction(p[0], p[1])
         })
@@ -193,7 +177,7 @@ function trainInteractionModel(onStatus) {
             return s + v
           }, 0) / knownProbs.length
         console.log(
-          "[ML-DDI] Mean predicted probability on known interaction pairs: " +
+          "[ML] Mean predicted probability on known interaction pairs: " +
             meanKnown.toFixed(3)
         )
       } catch (e) {}
@@ -206,7 +190,7 @@ function trainInteractionModel(onStatus) {
       return { accuracy: finalAcc, loss: finalLoss }
     })
     .catch(function (err) {
-      console.error("[ML-DDI] Training failed:", err)
+      console.error("[ML] Training failed:", err)
       if (onStatus) onStatus("error", "ML model: training failed")
       throw err
     })
@@ -214,10 +198,7 @@ function trainInteractionModel(onStatus) {
   return mlTrainingPromise
 }
 
-// --- Inference -------------------------------------------------------------
-
-// Returns interaction probability (0..1) for a drug pair, or null if the model
-// is not ready or a drug is unknown to the feature table.
+// Probability 0..1, or null if not ready / unknown drug.
 function predictInteraction(drugA, drugB) {
   if (!mlReady || !mlModel) return null
   if (!hasDrugFeatures(drugA) || !hasDrugFeatures(drugB)) return null
@@ -230,8 +211,7 @@ function predictInteraction(drugA, drugB) {
   return prob
 }
 
-// Scores every unordered pair among a set of found scientific names.
-// Returns [{ a, b, prob }] sorted by probability descending.
+// Score all pairs among found drugs.
 function scorePairs(names) {
   var uniq = []
   var seen = {}
@@ -256,8 +236,6 @@ function scorePairs(names) {
   return out
 }
 
-// --- Header status badge ----------------------------------------------------
-
 function setMlBadge(state, text) {
   var badge = document.getElementById("ml-status")
   if (!badge) {
@@ -271,10 +249,6 @@ function setMlBadge(state, text) {
   badge.textContent = text
 }
 
-// --- Results UI integration -------------------------------------------------
-
-// Called from app.js renderResults(). Appends an "ML interaction risk" section
-// to #results listing every found pair with its predicted probability.
 function renderMlRisk(result) {
   var box = document.getElementById("results")
   if (!box || !result || !result.found) return
@@ -288,11 +262,11 @@ function renderMlRisk(result) {
 
   var head =
     '<div class="ml-head"><strong>ML interaction risk</strong>' +
-    '<span class="ml-sub">TensorFlow.js neural net · predicts from drug features</span></div>'
+    '<span class="ml-sub">TensorFlow.js model based on drug features</span></div>'
 
   if (!mlReady) {
     section.innerHTML =
-      head + '<p class="muted ml-note">Model is still training — scores will appear shortly.</p>'
+      head + '<p class="muted ml-note">Model is still training. Scores will appear shortly.</p>'
     box.appendChild(section)
     return
   }
@@ -335,14 +309,12 @@ function renderMlRisk(result) {
 
   section.innerHTML =
     head +
-    '<p class="muted ml-note">Predicted probability that each pair interacts (model acc ' +
+    '<p class="muted ml-note">Estimated risk for each pair (model acc ' +
     (mlAccuracy !== null ? Math.round(mlAccuracy * 100) : "–") +
     '%). Pairs at or above 50% are flagged high risk.</p>' +
     rows
   box.appendChild(section)
 }
-
-// --- Bootstrap: train once the SQL databases are ready ----------------------
 
 function initMlWhenReady() {
   var tries = 0
@@ -352,7 +324,7 @@ function initMlWhenReady() {
     var tfReady = typeof tf !== "undefined"
     if (dbReady && tfReady) {
       clearInterval(timer)
-      setMlBadge("training", "ML model: training…")
+      setMlBadge("training", "ML model: training...")
       trainInteractionModel(setMlBadge)
         .then(function () {
           // Re-render if results are already on screen so scores show up.
@@ -365,7 +337,7 @@ function initMlWhenReady() {
     } else if (tries > 200) {
       clearInterval(timer)
       setMlBadge("error", "ML model: unavailable")
-      console.warn("[ML-DDI] Databases or TensorFlow.js not ready; ML disabled.")
+      console.warn("[ML] Databases or TensorFlow.js not ready; ML disabled.")
     }
   }, 100)
 }

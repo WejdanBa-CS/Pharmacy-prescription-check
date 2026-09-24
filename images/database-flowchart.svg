@@ -141,5 +141,5 @@
 <rect x="40" y="720" width="1400" height="88" rx="8" fill="#ffffff" stroke="#cde5df"/>
 <text x="60" y="750" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="bold" fill="#1f3d38">PK = primary key     FK = foreign key     1–N = one-to-many</text>
 <text x="60" y="776" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="13" font-weight="normal" fill="#5b746f">Open sql/prescriptions.db and sql/pharmacy.db in DB Browser for SQLite. SQL scripts: sql/prescriptions.sql and sql/pharmacy.sql.</text>
-<text x="60" y="798" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#5b746f">Section 2800-23  ·  Supervisor: Prasanna Lakshmi</text>
+<text x="60" y="798" text-anchor="start" font-family="Arial, Helvetica, sans-serif" font-size="12" font-weight="normal" fill="#5b746f">Section 2800-23  ·  Supervisor: Prasanalakshmi Balaji</text>
 </svg>
